@@ -1,0 +1,28 @@
+﻿USE QLDH_3_6_12
+-- Cursor
+--  4a
+ALTER TABLE GIAOHANG
+ADD THANHTIEN MONEY
+
+DECLARE @SOGH VARCHAR(10), @MAMH VARCHAR(10), @ThanhTien MONEY
+DECLARE cur_CauA cursor for (	SELECT G.SOGH, H.MAMH, SUM(C.SLGIAO* H.DG) 
+								FROM GIAOHANG G, CTGH C, MATHANG H
+								WHERE G.SOGH = C.SOGH AND H.MAMH = C.MAMH
+								GROUP BY G.SOGH, H.MAMH					)
+OPEN cur_CauA
+FETCH NEXT FROM cur_CauA INTO @SoGH, @MAMH, @ThanhTien
+PRINT N'Mã giao hàng' + Space(10) + N'Mã mặt hàng' + Space(10) + N'Thành tiền'
+WHILE (@@FETCH_STATUS = 0)
+	BEGIN
+		PRINT @SoGH + Space(10) + @MAMH + Space(10) + CONVERT(VARCHAR(10),@ThanhTien)
+		FETCH NEXT FROM cur_CauA INTO @SoGH, @MAMH, @ThanhTien
+	END
+-- 4b
+CREATE PROC sp_CauB @MANCC VARCHAR(10)
+AS
+	BEGIN
+		DECLARE @MAHG VARCHAR(10), @TENHG NVARCHAR(50), @TongSLNhap INT
+		DECLARE cur_CauB cursor for (	SELECT MAMH
+										FROM CUNGUNG 
+										WHERE MANCC = @MANCC )
+	END
