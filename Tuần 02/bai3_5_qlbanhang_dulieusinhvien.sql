@@ -1,9 +1,9 @@
 ﻿--bai 3.5: quản lí bán hàng
 -- Tạo CSDL
 -- Tạo CSDL
-CREATE DATABASE QLBH_3_5;
+CREATE DATABASE QLBH_3_5_12;
 GO
-USE QLBH;
+USE QLBH_3_5_12;
 GO
 
 -- Tạo bảng KHACHHG
